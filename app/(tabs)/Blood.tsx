@@ -1,7 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-
-
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 
 const bloodRequests = [
   {
@@ -10,6 +8,7 @@ const bloodRequests = [
     location: 'City Hospital, Delhi',
     bloodGroup: 'A+',
     urgency: 'High',
+    phone: '+91 98765 43210',
   },
   {
     id: '2',
@@ -17,6 +16,7 @@ const bloodRequests = [
     location: 'Apollo Hospital, Mumbai',
     bloodGroup: 'O−',
     urgency: 'Medium',
+    phone: '+91 87654 32109',
   },
   {
     id: '3',
@@ -24,10 +24,15 @@ const bloodRequests = [
     location: 'Fortis, Bangalore',
     bloodGroup: 'B+',
     urgency: 'Critical',
+    phone: '+91 76543 21098',
   },
 ];
 
 export default function Blood() {
+  const handleCall = (phoneNumber: string) => {
+    Linking.openURL(`tel:${phoneNumber}`);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Blood Required</Text>
@@ -40,6 +45,14 @@ export default function Blood() {
             <Text style={styles.detail}>Location: {item.location}</Text>
             <Text style={styles.detail}>Blood Group: <Text style={styles.blood}>{item.bloodGroup}</Text></Text>
             <Text style={styles.detail}>Urgency: <Text style={styles.urgency}>{item.urgency}</Text></Text>
+            <Text style={styles.detail}>Contact: {item.phone}</Text>
+            
+            <TouchableOpacity 
+              style={styles.callButton} 
+              onPress={() => handleCall(item.phone)}
+            >
+              <Text style={styles.callButtonText}>Call Now</Text>
+            </TouchableOpacity>
           </View>
         )}
       />
@@ -108,5 +121,18 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundColor: '#ff8c00',
     alignSelf: 'flex-start',
+  },
+  callButton: {
+    backgroundColor: '#d10000',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    marginTop: 12,
+    alignSelf: 'flex-start',
+  },
+  callButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });

@@ -43,6 +43,13 @@ export default function Login() {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => router.push('/register')}>
+        <Text style={styles.registerText}>
+       Don't have an account? <Text style={styles.registerLink}>Register</Text>
+      </Text>
+     </TouchableOpacity>
+     
     </View>
   );
 }
@@ -96,4 +103,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 1.1,
   },
+  registerText: {
+  color: '#A0AEC0',
+  marginTop: 20,
+},
+registerLink: {
+  color: '#3A86FF',
+  fontWeight: 'bold',
+},
 });
